@@ -18,7 +18,6 @@ oc create route edge \
     --key api.key \
     --cert api.crt
 ```
-
 #### Securing Applications with Passthrough Routes
 ```
 oc create route passthrough route-passthrough-secured \
@@ -33,15 +32,9 @@ oc create route passthrough route-passthrough-secured \
 
 ```bash
 #!/usr/bin/bash
-echo "===================================================================" 
-echo "PROJECT: <PROJECT_NAME>"
-echo
 oc get pods -o custom-columns="POD NAME:.metadata.name,IP ADDRESS:.status.podIP" -n <PROJECT_NAME>
-echo
 oc get svc -o custom-columns="SERVICE NAME:.metadata.name,CLUSTER-IP:.spec.clusterIP" -n <PROJECT_NAME>
-echo
 oc get route -o custom-columns="ROUTE NAME:.metadata.name,HOSTNAME:.spec.host,PORT:.spec.port.targetPort" -n <PROJECT_NAME>
-echo "==================================================================="
 ```
 
 ### Confirm Access 
