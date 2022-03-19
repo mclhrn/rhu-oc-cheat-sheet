@@ -30,8 +30,9 @@ Completion of Step 1 will give associates RHCEMD, enabling them to continue to a
 
 
 ## Step 2:
-### 1st two recommended (but not required):
-This table is for my specific choices. The table after represents the other exam choices for RHCA
+### Any 5 of the below Specialities:
+### 1st two recommended (but not required)
+This table is for my specific choices. The table after represents the other exam choices for RHCA. Combined is all available options for RHCA.
 | Course  | Exam Code  |
 |---|---|
 | _**Red Hat Certified Specialist in OpenShift Application Development**_  | [EX288](https://www.redhat.com/en/services/certification/rhcs-openshift-application-development?pfe-nk6u6r9jn=exams)  |
