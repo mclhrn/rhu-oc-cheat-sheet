@@ -20,11 +20,6 @@ Track 2 assumes the associate has attained [Red Hat Certified System Administrat
 | Red Hat Certified Enterprise Microservices Developer  | [RH378](https://www.redhat.com/en/services/certification/red-hat-certified-enterprise-microservices-developer)  |
 | Red Hat Certified Enterprise Microservices Developer  | [EX378](https://www.redhat.com/en/services/training/ex183-red-hat-certified-enterprise-application-developer-exam)  |
 
-<br />
-<hr />
-<br />
-<br />
-
 ## Step 2:
 #### Any 5 of the below specialities(1st two recommended (but not required)
 This table represents the elective exam choices for RHCA on the RHCEMD Track. 
@@ -60,11 +55,6 @@ This table represents the elective exam choices for RHCA on the RHCEMD Track.
 | Red Hat System Administrator  | [EX200]()  |
 | Red Hat System Administrator III  | [RH294]()  |
 | Red Hat Certified Engineer  | [EX294]()  |
-
-<br />
-<hr />
-<br />
-<br />
 
 ## Step 2:
 ## Optional Depth Areas
