@@ -13,11 +13,20 @@ The steps to attain RHCA are outlined below
 | Red Hat Certified Enterprise Microservices Developer  | [RH378](https://www.redhat.com/en/services/certification/red-hat-certified-enterprise-microservices-developer)  |
 | Red Hat Certified Enterprise Microservices Developer  | [EX378](https://www.redhat.com/en/services/training/ex183-red-hat-certified-enterprise-application-developer-exam)  |
 
-
 <br />
 <hr />
 <br />
 <br />
+
+# Alternate Step 1 - Red Hat Certified Engineer Track
+## Step 1:
+### Red Hat Certified Engineer (RHCE)
+| Course  | Code/Exam  |
+|---|---|
+| Red Hat Certified System Administrator Rapid Track  | [RH199]()  |
+| Red Hat System Administrator  | [EX200]()  |
+| Red Hat System Administrator III  | [RH294]()  |
+| Red Hat Certified Engineer  | [EX294]()  |
 
 ```
 Completion of Step 1 will give associates RHCEMD, enabling them to continue to aim for RHCA below
@@ -27,7 +36,6 @@ Completion of Step 1 will give associates RHCEMD, enabling them to continue to a
 <hr />
 <br />
 <br />
-
 
 ## Step 2:
 ### Any 5 of the below Specialities:
