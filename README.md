@@ -58,6 +58,7 @@ This table represents the elective exam choices for RHCA on the RHCEMD Track.
 
 ## Step 2:
 ## Optional Depth Areas
+Associates must pick a depth area and complete 5 specialist courses in order to attain RHCA status. 
 ### **Area 1:**
 **Open hybrid cloud program** 
 
