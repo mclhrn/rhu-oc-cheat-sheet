@@ -1,5 +1,5 @@
 # Path to Red Hat Certified Architect
-https://www.redhat.com/en/services/certification/rhca?pfe-dwnbbux5z=skills
+https://www.redhat.com/en/services/certification/rhca
 
 # RHCA
 The steps to attain RHCA are to pick a track from two available tracks.
