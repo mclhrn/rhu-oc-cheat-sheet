@@ -54,10 +54,5 @@ podman push quay.io/mhearne/do180-custom-httpd:v1.0
 
 # pull image to confirm
 podman pull -q quay.io/mhearne/do180-custom-httpd:v1.0
-
-
-
-
-
 ```
 
