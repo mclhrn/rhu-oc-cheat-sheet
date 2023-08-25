@@ -57,6 +57,31 @@ curl http://greet-${RHT_OCP4_DEV_USER}-source-build.${RHT_OCP4_WILDCARD_DOMAIN}
 * Build a container image with advanced Dockerfile directives.
 * Select a method for injecting configuration data into an application and create the necessary resources to do so.
 
+##### Build Cotainerfile with advanced Conatinerfile Instructions
+Edit the ~/DO288-apps/container-build/Containerfile to contain the following:
+```shell
+# Use the httpd-parent image as base
+# Th FROM line is the important bit 
+# This image is setup to accept a configuration from a /src dir 
+#   similar to ~/DO288-apps/container-build/
+FROM quay.io/redhattraining/httpd-parent                                                                                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# Everything below is just Apache configuration to run the server
+LABEL io.k8s.description="A basic Apache HTTP Server child image, uses ONBUILD" \
+      io.k8s.display-name="Apache HTTP Server" \
+      io.openshift.expose-services="8080:http" \
+      io.openshift.tags="apache, httpd"
+
+RUN sed -i "s/Listen 80/Listen 8080/g" /etc/httpd/conf/httpd.conf
+RUN sed -i "s/#ServerName www.example.com:80/ServerName 0.0.0.0:8080/g" /etc/httpd/conf/httpd.conf
+
+RUN chgrp -R 0 /var/log/httpd /var/run/httpd && \
+    chmod -R g=u /var/log/httpd /var/run/httpd
+
+USER 1001
+```
+
+##### Injecting Configuration Data into an Application
 ```shell
 # Create branch to push and build from
 git checkout -b design-container
@@ -89,7 +114,7 @@ RUN   chown -R wildfly:wildfly /opt/app-root && \
       chmod -R 700 /opt/app-root
       
 # With this
-RUN   chgrp -R 0 /opt/app-root && \
+RUN  chgrp -R 0 /opt/app-root && \
       chmod -R g=u /opt/app-root
 
 # This changes the group and assigns the same permissions as the user
@@ -132,6 +157,35 @@ In this lab, you will publish an OCI-formatted container image to an external re
 * Manage container images in registries using Linux container tools.
 * Access the OpenShift internal registry using Linux container tools.
 * Create image streams for container images in external registries.
+
+##### Accessing the Internal registry
+The OpenShift installer configures the internal registry to be accessible only from inside its OpenShift cluster. Exposing the internal registry for external access is a simple procedure, but requires cluster administration privileges.
+
+The OpenShift Image Registry Operator manages the internal registry. All configuration settings for the Image Registry operator are in the cluster configuration resource in the openshift-image-registry project. Change the spec.defaultRoute attribute to true, and the Image Registry operator creates a route to expose the internal registry. One way to perform that change uses the following oc patch command:
+
+```shell
+oc patch config.imageregistry cluster -n openshift-image-registry \
+--type merge -p '{"spec":{"defaultRoute":true}}'
+``` 
+
+The default-route route uses the default wildcard domain name for application deployed to the cluster:
+```shell
+oc get route -n openshift-image-registry
+NAME            HOST/PORT                                                  ...
+default-route   default-route-openshift-image-registry.domain.example.com  ...
+```
+
+###### Authenticating to an Internal Registry
+To log in to an internal registry using the Linux container tools, you need to fetch your user's OpenShift authentication token.
+Use the oc whoami -t command to fetch the token. The token is a long, random string. It is easier to type commands if you save the token as a shell variable:
+
+```shell
+TOKEN=$(oc whoami -t)
+# Use the token as part of a login subcommand from Podman:
+
+podman login -u myuser -p ${TOKEN} default-route-openshift-image-registry.domain.example.com
+```
+
 ```shell
 # From directory with OCI image run below to copy to external registry                                                  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
 skopeo copy --format v2s1 \
@@ -180,6 +234,20 @@ oc new-app --name info -i ${RHT_OCP4_DEV_USER}-common/php-info
 * Process post build logic with a post-commit build hook.
 
 ```shell
+# Triggers
+oc set triggers bc/name --from-image=project/image:tag
+oc set triggers bc/name --from-image=project/image:tag --remove
+
+# Hooks
+# Command
+oc set build-hook bc/name \
+  --post-commit \
+  --command -- bundle exec rake test --verbose
+
+# Shell
+oc set build-hook bc/name --post-commit \
+  --script="curl http://api.com/user/${USER}"
+
 # Deploy app with error in env var
 oc new-app \
     --name simple \
@@ -217,6 +285,31 @@ oc secrets link builder quay-registry
 * Describe the required and optional steps in the Source-to-Image build process.
 * Customize an existing S2I builder image with scripts.
 * Create a new S2I builder image with S2I tools.
+
+##### 
+
+.s2i/bin/assemble
+```shell
+# The custom S2I scripts are in the /home/student/DO288-apps/s2i-scripts/.s2i/bin folder. The .s2i/bin/assemble script copies the index.html file from the application source to the web server document root at /opt/app-root/src. It also creates an info.html file containing page build time and environment information:
+#...output omitted...
+# CUSTOMIZATION STARTS HERE 
+echo "---> Installing application source"
+cp -Rf /tmp/src/*.html ./
+
+DATE=date "+%b %d, %Y @ %H:%M %p"
+
+echo "---> Creating info page"
+echo "Page built on $DATE" >> ./info.html
+echo "Proudly served by Apache HTTP Server version $HTTPD_VERSION" >> ./info.html
+# CUSTOMIZATION ENDS HERE 
+#...output omitted...
+```
+
+.s2i/bin/run
+```shell
+# Make Apache show 'debug' level logs during startup
+exec run-httpd -e debug $@
+```
 
 ```shell
 # Registry url

@@ -1,3 +1,8 @@
+
+**********************************************************************************
+# !!!! THIS NEEDS AN UPDATE !!!!
+**********************************************************************************
+
 # Path to Red Hat Certified Architect
 https://www.redhat.com/en/services/certification/rhca
 
