@@ -1,3 +1,5 @@
+** Version 4.12 Specific **
+
 ## Introduction
 This course prepares a senior OpenShift Cluster Administrator to perform daily administration tasks on clusters that host applications that internal teams and external vendors provide; enable self-service for cluster users with different roles; and deploy applications that require special permissions, such as CI/CD tooling, performance monitoring, and security scanners.
 DO280 focuses on configuring multi-tenancy and security features of OpenShift. DO280 also teaches how to manage OpenShift add-ons based on operators. This course is based on Red Hat® OpenShift® Container Platform 4.12.
