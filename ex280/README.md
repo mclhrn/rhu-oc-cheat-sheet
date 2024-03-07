@@ -1,4 +1,6 @@
-** Version 4.12 Specific **
+***************************
+* *Version 4.12 Specific* *
+***************************
 
 ## Introduction
 This course prepares a senior OpenShift Cluster Administrator to perform daily administration tasks on clusters that host applications that internal teams and external vendors provide; enable self-service for cluster users with different roles; and deploy applications that require special permissions, such as CI/CD tooling, performance monitoring, and security scanners.
